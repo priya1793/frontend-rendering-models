@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 **Flow Diagram:**
-```mermaid
 graph TD
     A[User Requests Page] --> B[Server Sends HTML Shell]
     B --> C[Browser Downloads JavaScript]
@@ -81,15 +80,14 @@ graph TD
     D --> E[API Calls / Data Fetching]
     E --> F[Content Rendered in Browser]
     F --> G[Page Becomes Interactive]
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style C fill:#bbf,stroke:#333,stroke-width:2px
-    style D fill:#bbf,stroke:#333,stroke-width:2px
-    style E fill:#bbf,stroke:#333,stroke-width:2px
-    style F fill:#bfb,stroke:#333,stroke-width:2px
-    style G fill:#bfb,stroke:#333,stroke-width:2px
-```
+
+    style A fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#333
+    style B fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style C fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style G fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
 
 **Pros:**
 - ✅ Rich site interactions
@@ -131,7 +129,6 @@ app.get('/', async (req, res) => {
 ```
 
 **Flow Diagram:**
-```mermaid
 graph TD
     A[User Requests Page] --> B[Server Receives Request]
     B --> C[Server Fetches Data]
@@ -141,17 +138,16 @@ graph TD
     F --> G[Browser Downloads JavaScript]
     G --> H[JavaScript Hydrates Page]
     H --> I[Page Becomes Fully Interactive]
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#fbb,stroke:#333,stroke-width:2px
-    style C fill:#fbb,stroke:#333,stroke-width:2px
-    style D fill:#fbb,stroke:#333,stroke-width:2px
-    style E fill:#fbb,stroke:#333,stroke-width:2px
-    style F fill:#bfb,stroke:#333,stroke-width:2px
-    style G fill:#bbf,stroke:#333,stroke-width:2px
-    style H fill:#bbf,stroke:#333,stroke-width:2px
-    style I fill:#bfb,stroke:#333,stroke-width:2px
-```
+
+    style A fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#333
+    style B fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style C fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style D fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style E fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style F fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style G fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style H fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style I fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
 
 **Pros:**
 - ✅ Fast initial page load
@@ -202,7 +198,6 @@ buildSite();
 ```
 
 **Flow Diagram:**
-```mermaid
 graph TD
     subgraph "Build Time"
         A[Run Build Script] --> B[Fetch Data from APIs/CMS]
@@ -218,14 +213,13 @@ graph TD
     
     D --> E
     
-    style A fill:#fbb,stroke:#333,stroke-width:2px
-    style B fill:#fbb,stroke:#333,stroke-width:2px
-    style C fill:#fbb,stroke:#333,stroke-width:2px
-    style D fill:#fbb,stroke:#333,stroke-width:2px
-    style E fill:#f9f,stroke:#333,stroke-width:2px
-    style F fill:#bfb,stroke:#333,stroke-width:2px
-    style G fill:#bfb,stroke:#333,stroke-width:2px
-```
+    style A fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style B fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style C fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style D fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style E fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#333
+    style F fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style G fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
 
 **Pros:**
 - ✅ Extremely fast (served from CDN)
@@ -265,14 +259,13 @@ export async function getStaticPaths() {
 ```
 
 **Flow Diagram:**
-```mermaid
 graph TD
     subgraph "Build Time"
         A[Build Site] --> B[Generate Popular Pages]
         B --> C[Store in Cache with revalidate time]
     end
     
-    subgraph "First Request"
+    subgraph "Request Time"
         D[User Requests Page] --> E{Page in Cache?}
         E -->|No| F[Generate Page on-demand]
         F --> G[Cache Page]
@@ -284,19 +277,18 @@ graph TD
         K --> L[Update cache with new version]
     end
     
-    style A fill:#fbb,stroke:#333,stroke-width:2px
-    style B fill:#fbb,stroke:#333,stroke-width:2px
-    style C fill:#fbb,stroke:#333,stroke-width:2px
-    style D fill:#f9f,stroke:#333,stroke-width:2px
-    style E fill:#ff0,stroke:#333,stroke-width:2px
-    style F fill:#fbb,stroke:#333,stroke-width:2px
-    style G fill:#fbb,stroke:#333,stroke-width:2px
-    style H fill:#bfb,stroke:#333,stroke-width:2px
-    style I fill:#ff0,stroke:#333,stroke-width:2px
-    style J fill:#bfb,stroke:#333,stroke-width:2px
-    style K fill:#bfb,stroke:#333,stroke-width:2px
-    style L fill:#fbb,stroke:#333,stroke-width:2px
-```
+    style A fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style B fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style C fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style D fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#333
+    style E fill:#616161,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style G fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style H fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style I fill:#616161,stroke:#333,stroke-width:2px,color:#fff
+    style J fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style K fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style L fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
 
 **Key Features:**
 - 🔄 **Background Regeneration**: Update pages without rebuilding entire site
@@ -389,10 +381,8 @@ import ImageCarousel from '../components/ImageCarousel';
 </article>
 ```
 
-**Visual Representation:**
-```mermaid
-graph TD
-    subgraph "Server/Build"
+**Flow Diagram:**
+subgraph "Server/Build"
         A[Generate Static HTML] --> B[Identify Interactive Islands]
         B --> C[Mark Islands with client directives]
     end
@@ -419,24 +409,23 @@ graph TD
     C --> D
     F --> G
     
-    style A fill:#fbb,stroke:#333,stroke-width:2px
-    style B fill:#fbb,stroke:#333,stroke-width:2px
-    style C fill:#fbb,stroke:#333,stroke-width:2px
-    style D fill:#bbf,stroke:#333,stroke-width:2px
-    style E fill:#bfb,stroke:#333,stroke-width:2px
-    style F fill:#bfb,stroke:#333,stroke-width:2px
-    style G fill:#ff0,stroke:#333,stroke-width:2px
-    style H fill:#bbf,stroke:#333,stroke-width:2px
-    style I fill:#bbf,stroke:#333,stroke-width:2px
-    style J fill:#bbf,stroke:#333,stroke-width:2px
-    style K fill:#bfb,stroke:#333,stroke-width:2px
-    style L fill:#bfb,stroke:#333,stroke-width:2px
-    style N fill:#bfb,stroke:#333,stroke-width:2px
-```
+    style A fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style B fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style C fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style D fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style F fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style G fill:#616161,stroke:#333,stroke-width:2px,color:#fff
+    style H fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style I fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style J fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style K fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style L fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style N fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
 
-**Island Architecture Visual Representation
 
-```mermaid
+**Visual Representation:**
+
 graph TD
     subgraph "Complete Web Page"
         direction TB
@@ -485,21 +474,20 @@ graph TD
         JS3 -.-> I3
     end
     
-    style H1 fill:#ddd,stroke:#333
-    style P1 fill:#ddd,stroke:#333
-    style P2 fill:#ddd,stroke:#333
-    style P3 fill:#ddd,stroke:#333
-    style P4 fill:#ddd,stroke:#333
-    style F1 fill:#ddd,stroke:#333
+    style H1 fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#333
+    style P1 fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#333
+    style P2 fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#333
+    style P3 fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#333
+    style P4 fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#333
+    style F1 fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#333
     
-    style I1 fill:#f9f,stroke:#333,stroke-width:3px
-    style I2 fill:#f9f,stroke:#333,stroke-width:3px
-    style I3 fill:#f9f,stroke:#333,stroke-width:3px
+    style I1 fill:#e0e0e0,stroke:#333,stroke-width:3px,color:#333
+    style I2 fill:#e0e0e0,stroke:#333,stroke-width:3px,color:#333
+    style I3 fill:#e0e0e0,stroke:#333,stroke-width:3px,color:#333
     
-    style JS1 fill:#bbf,stroke:#333,stroke-dasharray: 5 5
-    style JS2 fill:#bbf,stroke:#333,stroke-dasharray: 5 5
-    style JS3 fill:#bbf,stroke:#333,stroke-dasharray: 5 5
-```
+    style JS1 fill:#9e9e9e,stroke:#333,stroke-dasharray: 5 5,color:#fff
+    style JS2 fill:#9e9e9e,stroke:#333,stroke-dasharray: 5 5,color:#fff
+    style JS3 fill:#9e9e9e,stroke:#333,stroke-dasharray: 5 5,color:#fff
 
 **Key Features:**
 - 🏝️ **Selective Hydration**: Only hydrate interactive components
@@ -539,7 +527,7 @@ app.get('/', (req, res) => {
 });
 ```
 
-```mermaid
+**Sequence Diagram:**
 sequenceDiagram
     participant User
     participant Browser
@@ -568,7 +556,145 @@ sequenceDiagram
     
     Browser->>Browser: Hydrate Page
     Browser-->>User: Fully Interactive Page
-```
+
+**Flow Diagram:**
+graph TD
+    subgraph "Server Side"
+        A[Request Received] --> B[Render Shell Immediately]
+        B --> C[Start Streaming HTML]
+        C --> D[Fetch Data in Parallel]
+        D --> E[Render Content Chunks]
+        E --> F[Stream Chunks to Browser]
+    end
+    
+    subgraph "Browser Side"
+        G[Receive HTML Shell] --> H[Display Shell Immediately]
+        H --> I[Receive Chunk 1]
+        I --> J[Render Header]
+        J --> K[Receive Chunk 2]
+        K --> L[Render Main Content]
+        L --> M[Receive Chunk 3]
+        M --> N[Render Comments]
+        N --> O[Download JavaScript]
+        O --> P[Hydrate Page]
+        P --> Q[Fully Interactive]
+    end
+    
+    F -.-> G
+    F -.-> I
+    F -.-> K
+    F -.-> M
+    
+    style A fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style B fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style C fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style D fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style E fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    style F fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+    
+    style G fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style H fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style I fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style J fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style K fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style L fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style M fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style N fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style O fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style P fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style Q fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+
+**Visual Representation:**
+
+graph TD
+    subgraph "Server"
+        direction TB
+        S1[Request Handler] --> S2[Shell Renderer]
+        S2 --> S3[Stream Manager]
+        
+        subgraph "Data Sources"
+            D1[(Database)]
+            D2[(API)]
+            D3[(CMS)]
+        end
+        
+        S3 --> P1[Chunk 1: Header]
+        S3 --> P2[Chunk 2: Content]
+        S3 --> P3[Chunk 3: Footer]
+        S3 --> P4[Chunk 4: Comments]
+        
+        D1 -.-> P2
+        D2 -.-> P3
+        D3 -.-> P4
+    end
+    
+    subgraph "Network"
+        N1[Initial Shell]
+        N2[Chunk Stream]
+    end
+    
+    subgraph "Browser"
+        direction TB
+        B1[Receive Shell] --> B2[Render Shell]
+        B2 --> B3[Display Shell]
+        
+        B3 --> B4[Receive Chunk 1]
+        B4 --> B5[Render Header]
+        B5 --> B6[Display Header]
+        
+        B6 --> B7[Receive Chunk 2]
+        B7 --> B8[Render Content]
+        B8 --> B9[Display Content]
+        
+        B9 --> B10[Continue Receiving]
+        B10 --> B11[Progressive Display]
+        
+        B11 --> B12[Load JavaScript]
+        B12 --> B13[Hydrate]
+        B13 --> B14[Interactive]
+    end
+    
+    S2 --> N1
+    P1 --> N2
+    P2 --> N2
+    P3 --> N2
+    P4 --> N2
+    
+    N1 --> B1
+    N2 --> B4
+    N2 --> B7
+    N2 --> B10
+    
+    style S1 fill:#e0e0e0,stroke:#333,color:#333
+    style S2 fill:#e0e0e0,stroke:#333,color:#333
+    style S3 fill:#e0e0e0,stroke:#333,color:#333
+    style D1 fill:#f5f5f5,stroke:#333,color:#333
+    style D2 fill:#f5f5f5,stroke:#333,color:#333
+    style D3 fill:#f5f5f5,stroke:#333,color:#333
+    style P1 fill:#e0e0e0,stroke:#333,color:#333
+    style P2 fill:#e0e0e0,stroke:#333,color:#333
+    style P3 fill:#e0e0e0,stroke:#333,color:#333
+    style P4 fill:#e0e0e0,stroke:#333,color:#333
+    
+    style B1 fill:#9e9e9e,stroke:#333,color:#fff
+    style B2 fill:#9e9e9e,stroke:#333,color:#fff
+    style B3 fill:#bdbdbd,stroke:#333,color:#333
+    style B4 fill:#9e9e9e,stroke:#333,color:#fff
+    style B5 fill:#9e9e9e,stroke:#333,color:#fff
+    style B6 fill:#bdbdbd,stroke:#333,color:#333
+    style B7 fill:#9e9e9e,stroke:#333,color:#fff
+    style B8 fill:#9e9e9e,stroke:#333,color:#fff
+    style B9 fill:#bdbdbd,stroke:#333,color:#333
+    style B10 fill:#9e9e9e,stroke:#333,color:#fff
+    style B11 fill:#bdbdbd,stroke:#333,color:#333
+    style B12 fill:#9e9e9e,stroke:#333,color:#fff
+    style B13 fill:#9e9e9e,stroke:#333,color:#fff
+    style B14 fill:#bdbdbd,stroke:#333,color:#333
+    
+    style N1 fill:#f5f5f5,stroke:#333,color:#333
+    style N2 fill:#f5f5f5,stroke:#333,color:#333
+
+    
 
 **Benefits:**
 - 📦 **Progressive Loading**: Show content as it renders
@@ -585,6 +711,132 @@ const Header = lazy(() => import('./Header'), { priority: 'high' });
 const Comments = lazy(() => import('./Comments'), { priority: 'low' });
 const Footer = lazy(() => import('./Footer'), { priority: 'idle' });
 ```
+
+**Flow Diagram:**
+
+graph TD
+    subgraph "Initial Load"
+        A[Server Sends HTML] --> B[Browser Displays Static Content]
+        B --> C{Start Hydration Process}
+    end
+    
+    subgraph "Hydration Queue"
+        C --> D[Critical Components]
+        C --> E[Visible Components]
+        C --> F[Below Fold Components]
+        C --> G[Idle Components]
+    end
+    
+    subgraph "Priority 1 - Critical"
+        D --> H[Header Navigation]
+        H --> I[Hydrate Immediately]
+        I --> J[Interactive - Critical]
+    end
+    
+    subgraph "Priority 2 - Visible"
+        E --> K[Above Fold Content]
+        K --> L[Hydrate When Visible]
+        L --> M[Interactive - Visible]
+    end
+    
+    subgraph "Priority 3 - Below Fold"
+        F --> N[Scroll-Away Content]
+        N --> O[Hydrate on Scroll]
+        O --> P[Interactive - Below]
+    end
+    
+    subgraph "Priority 4 - Idle"
+        G --> Q[Non-Critical Widgets]
+        Q --> R[Hydrate When Idle]
+        R --> S[Interactive - Background]
+    end
+    
+    style A fill:#e0e0e0,stroke:#333,color:#333
+    style B fill:#bdbdbd,stroke:#333,color:#333
+    style C fill:#616161,stroke:#333,color:#fff
+    
+    style D fill:#bdbdbd,stroke:#333,color:#333
+    style E fill:#bdbdbd,stroke:#333,color:#333
+    style F fill:#bdbdbd,stroke:#333,color:#333
+    style G fill:#bdbdbd,stroke:#333,color:#333
+    
+    style H fill:#9e9e9e,stroke:#333,color:#fff
+    style I fill:#9e9e9e,stroke:#333,color:#fff
+    style J fill:#bdbdbd,stroke:#333,color:#333
+    
+    style K fill:#9e9e9e,stroke:#333,color:#fff
+    style L fill:#9e9e9e,stroke:#333,color:#fff
+    style M fill:#bdbdbd,stroke:#333,color:#333
+    
+    style N fill:#9e9e9e,stroke:#333,color:#fff
+    style O fill:#9e9e9e,stroke:#333,color:#fff
+    style P fill:#bdbdbd,stroke:#333,color:#333
+    
+    style Q fill:#9e9e9e,stroke:#333,color:#fff
+    style R fill:#9e9e9e,stroke:#333,color:#fff
+    style S fill:#bdbdbd,stroke:#333,color:#333
+
+**Visual Representation - Hydration Prioritization**
+
+ subgraph "Web Page - Progressive Hydration"
+        direction TB
+        
+        subgraph "Critical Zone - Hydrate Immediately"
+            C1[Header Navigation]
+            C2[Search Bar]
+            C3[Shopping Cart Icon]
+        end
+        
+        subgraph "Viewport Zone - Hydrate When Visible"
+            V1[Main Hero Image - Interactive]
+            V2[Call to Action Button]
+            V3[Product Quick View]
+        end
+        
+        subgraph "Below Fold Zone - Hydrate on Scroll"
+            B1[Product Recommendations]
+            B2[Customer Reviews]
+            B3[Related Items Carousel]
+        end
+        
+        subgraph "Idle Zone - Hydrate When Browser Idle"
+            I1[Chat Widget]
+            I2[Newsletter Popup]
+            I3[Analytics Trackers]
+            I4[Social Media Feeds]
+        end
+        
+        C1 --> V1
+        C2 --> V2
+        C3 --> V3
+        
+        V1 --> B1
+        V2 --> B2
+        V3 --> B3
+        
+        B1 --> I1
+        B2 --> I2
+        B3 --> I3
+    end
+    
+    style C1 fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style C2 fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    style C3 fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+    
+    style V1 fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style V2 fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    style V3 fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
+    
+    style B1 fill:#757575,stroke:#333,stroke-width:2px,color:#fff
+    style B2 fill:#757575,stroke:#333,stroke-width:2px,color:#fff
+    style B3 fill:#757575,stroke:#333,stroke-width:2px,color:#fff
+    
+    style I1 fill:#616161,stroke:#333,stroke-width:2px,color:#fff
+    style I2 fill:#616161,stroke:#333,stroke-width:2px,color:#fff
+    style I3 fill:#616161,stroke:#333,stroke-width:2px,color:#fff
+    style I4 fill:#616161,stroke:#333,stroke-width:2px,color:#fff
+
+    
 
 ## Comparison Matrix
 
