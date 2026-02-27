@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 **Flow Diagram:**
+
+```mermaid
 graph TD
     A[User Requests Page] --> B[Server Sends HTML Shell]
     B --> C[Browser Downloads JavaScript]
@@ -88,6 +90,8 @@ graph TD
     style E fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
     style F fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
     style G fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+```
+
 
 **Pros:**
 - ✅ Rich site interactions
@@ -129,6 +133,8 @@ app.get('/', async (req, res) => {
 ```
 
 **Flow Diagram:**
+
+```mermaid
 graph TD
     A[User Requests Page] --> B[Server Receives Request]
     B --> C[Server Fetches Data]
@@ -148,6 +154,7 @@ graph TD
     style G fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
     style H fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
     style I fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+```
 
 **Pros:**
 - ✅ Fast initial page load
@@ -198,6 +205,8 @@ buildSite();
 ```
 
 **Flow Diagram:**
+
+```mermaid
 graph TD
     subgraph "Build Time"
         A[Run Build Script] --> B[Fetch Data from APIs/CMS]
@@ -220,6 +229,7 @@ graph TD
     style E fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#333
     style F fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
     style G fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+```
 
 **Pros:**
 - ✅ Extremely fast (served from CDN)
@@ -259,6 +269,8 @@ export async function getStaticPaths() {
 ```
 
 **Flow Diagram:**
+
+```mermaid
 graph TD
     subgraph "Build Time"
         A[Build Site] --> B[Generate Popular Pages]
@@ -289,6 +301,8 @@ graph TD
     style J fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
     style K fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
     style L fill:#e0e0e0,stroke:#333,stroke-width:2px,color:#333
+```
+
 
 **Key Features:**
 - 🔄 **Background Regeneration**: Update pages without rebuilding entire site
@@ -382,6 +396,8 @@ import ImageCarousel from '../components/ImageCarousel';
 ```
 
 **Flow Diagram:**
+
+```mermaid
 subgraph "Server/Build"
         A[Generate Static HTML] --> B[Identify Interactive Islands]
         B --> C[Mark Islands with client directives]
@@ -422,10 +438,12 @@ subgraph "Server/Build"
     style K fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
     style L fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
     style N fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+```
 
 
 **Visual Representation:**
 
+```mermaid
 graph TD
     subgraph "Complete Web Page"
         direction TB
@@ -488,6 +506,8 @@ graph TD
     style JS1 fill:#9e9e9e,stroke:#333,stroke-dasharray: 5 5,color:#fff
     style JS2 fill:#9e9e9e,stroke:#333,stroke-dasharray: 5 5,color:#fff
     style JS3 fill:#9e9e9e,stroke:#333,stroke-dasharray: 5 5,color:#fff
+```
+
 
 **Key Features:**
 - 🏝️ **Selective Hydration**: Only hydrate interactive components
@@ -528,6 +548,8 @@ app.get('/', (req, res) => {
 ```
 
 **Sequence Diagram:**
+
+```mermaid
 sequenceDiagram
     participant User
     participant Browser
@@ -556,8 +578,12 @@ sequenceDiagram
     
     Browser->>Browser: Hydrate Page
     Browser-->>User: Fully Interactive Page
+```
+
 
 **Flow Diagram:**
+
+```mermaid
 graph TD
     subgraph "Server Side"
         A[Request Received] --> B[Render Shell Immediately]
@@ -603,9 +629,12 @@ graph TD
     style O fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
     style P fill:#9e9e9e,stroke:#333,stroke-width:2px,color:#fff
     style Q fill:#bdbdbd,stroke:#333,stroke-width:2px,color:#333
+```
+
 
 **Visual Representation:**
 
+```mermaid
 graph TD
     subgraph "Server"
         direction TB
@@ -693,7 +722,7 @@ graph TD
     
     style N1 fill:#f5f5f5,stroke:#333,color:#333
     style N2 fill:#f5f5f5,stroke:#333,color:#333
-
+```
     
 
 **Benefits:**
@@ -714,6 +743,7 @@ const Footer = lazy(() => import('./Footer'), { priority: 'idle' });
 
 **Flow Diagram:**
 
+```mermaid
 graph TD
     subgraph "Initial Load"
         A[Server Sends HTML] --> B[Browser Displays Static Content]
@@ -775,9 +805,12 @@ graph TD
     style Q fill:#9e9e9e,stroke:#333,color:#fff
     style R fill:#9e9e9e,stroke:#333,color:#fff
     style S fill:#bdbdbd,stroke:#333,color:#333
+```
+
 
 **Visual Representation - Hydration Prioritization**
 
+```mermaid
  subgraph "Web Page - Progressive Hydration"
         direction TB
         
@@ -835,7 +868,7 @@ graph TD
     style I2 fill:#616161,stroke:#333,stroke-width:2px,color:#fff
     style I3 fill:#616161,stroke:#333,stroke-width:2px,color:#fff
     style I4 fill:#616161,stroke:#333,stroke-width:2px,color:#fff
-
+```
     
 
 ## Comparison Matrix
