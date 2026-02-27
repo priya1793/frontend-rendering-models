@@ -406,8 +406,7 @@ graph TD
 **Sequence Diagram:**
 
 ```mermaid
-graph TD
-  sequenceDiagram
+sequenceDiagram
     participant User
     participant Browser
     participant Server
