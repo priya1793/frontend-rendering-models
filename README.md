@@ -73,9 +73,22 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 **Flow Diagram:**
-```
-User Request → Server sends HTML shell → Browser downloads JS → 
-JS executes → API calls → Content rendered → Interactive
+```mermaid
+graph TD
+    A[User Requests Page] --> B[Server Sends HTML Shell]
+    B --> C[Browser Downloads JavaScript]
+    C --> D[JavaScript Executes]
+    D --> E[API Calls / Data Fetching]
+    E --> F[Content Rendered in Browser]
+    F --> G[Page Becomes Interactive]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#bbf,stroke:#333,stroke-width:2px
+    style D fill:#bbf,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+    style G fill:#bfb,stroke:#333,stroke-width:2px
 ```
 
 **Pros:**
@@ -118,9 +131,26 @@ app.get('/', async (req, res) => {
 ```
 
 **Flow Diagram:**
-```
-User Request → Server fetches data → Server renders HTML → 
-Send complete HTML → Browser displays → JS hydrates
+```mermaid
+graph TD
+    A[User Requests Page] --> B[Server Receives Request]
+    B --> C[Server Fetches Data]
+    C --> D[Server Renders Complete HTML]
+    D --> E[Server Sends HTML to Browser]
+    E --> F[Browser Displays Content Immediately]
+    F --> G[Browser Downloads JavaScript]
+    G --> H[JavaScript Hydrates Page]
+    H --> I[Page Becomes Fully Interactive]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#fbb,stroke:#333,stroke-width:2px
+    style C fill:#fbb,stroke:#333,stroke-width:2px
+    style D fill:#fbb,stroke:#333,stroke-width:2px
+    style E fill:#fbb,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+    style G fill:#bbf,stroke:#333,stroke-width:2px
+    style H fill:#bbf,stroke:#333,stroke-width:2px
+    style I fill:#bfb,stroke:#333,stroke-width:2px
 ```
 
 **Pros:**
@@ -172,9 +202,29 @@ buildSite();
 ```
 
 **Flow Diagram:**
-```
-Build Time: Fetch data → Generate HTML → Save static files
-Request Time: Serve static HTML directly from CDN
+```mermaid
+graph TD
+    subgraph "Build Time"
+        A[Run Build Script] --> B[Fetch Data from APIs/CMS]
+        B --> C[Generate HTML Pages]
+        C --> D[Save Static Files to Disk]
+    end
+    
+    subgraph "Request Time"
+        E[User Requests Page] --> F[CDN/Server Serves Static HTML]
+        F --> G[Browser Displays Content Immediately]
+        G --> H[Optional: Hydration with JS]
+    end
+    
+    D --> E
+    
+    style A fill:#fbb,stroke:#333,stroke-width:2px
+    style B fill:#fbb,stroke:#333,stroke-width:2px
+    style C fill:#fbb,stroke:#333,stroke-width:2px
+    style D fill:#fbb,stroke:#333,stroke-width:2px
+    style E fill:#f9f,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+    style G fill:#bfb,stroke:#333,stroke-width:2px
 ```
 
 **Pros:**
@@ -215,12 +265,37 @@ export async function getStaticPaths() {
 ```
 
 **Flow Diagram:**
-```
-Build Time: Generate popular pages
-Request Time: 
-  - Serve cached page if fresh
-  - If stale, serve cached page + regenerate in background
-  - If not generated, generate on-demand and cache
+```mermaid
+graph TD
+    subgraph "Build Time"
+        A[Build Site] --> B[Generate Popular Pages]
+        B --> C[Store in Cache with revalidate time]
+    end
+    
+    subgraph "First Request"
+        D[User Requests Page] --> E{Page in Cache?}
+        E -->|No| F[Generate Page on-demand]
+        F --> G[Cache Page]
+        G --> H[Serve to User]
+        
+        E -->|Yes| I{Is cache stale?}
+        I -->|No| J[Serve cached page]
+        I -->|Yes| K[Serve stale page + Regenerate in background]
+        K --> L[Update cache with new version]
+    end
+    
+    style A fill:#fbb,stroke:#333,stroke-width:2px
+    style B fill:#fbb,stroke:#333,stroke-width:2px
+    style C fill:#fbb,stroke:#333,stroke-width:2px
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+    style E fill:#ff0,stroke:#333,stroke-width:2px
+    style F fill:#fbb,stroke:#333,stroke-width:2px
+    style G fill:#fbb,stroke:#333,stroke-width:2px
+    style H fill:#bfb,stroke:#333,stroke-width:2px
+    style I fill:#ff0,stroke:#333,stroke-width:2px
+    style J fill:#bfb,stroke:#333,stroke-width:2px
+    style K fill:#bfb,stroke:#333,stroke-width:2px
+    style L fill:#fbb,stroke:#333,stroke-width:2px
 ```
 
 **Key Features:**
@@ -315,16 +390,115 @@ import ImageCarousel from '../components/ImageCarousel';
 ```
 
 **Visual Representation:**
+```mermaid
+graph TD
+    subgraph "Server/Build"
+        A[Generate Static HTML] --> B[Identify Interactive Islands]
+        B --> C[Mark Islands with client directives]
+    end
+    
+    subgraph "Browser - Initial Load"
+        D[Receive Static HTML] --> E[Render Static Content Immediately]
+        E --> F[User Sees Full Page]
+    end
+    
+    subgraph "Progressive Enhancement"
+        G{Island Visibility/Interaction}
+        G -->|Island becomes visible| H[Load Island JavaScript]
+        G -->|User interacts| I[Load Island JavaScript]
+        G -->|Browser idle| J[Preload Islands]
+        
+        H --> K[Hydrate Island 1]
+        I --> L[Hydrate Island 2]
+        J --> M[Background Load]
+        
+        K --> N[Island becomes interactive]
+        L --> N
+    end
+    
+    C --> D
+    F --> G
+    
+    style A fill:#fbb,stroke:#333,stroke-width:2px
+    style B fill:#fbb,stroke:#333,stroke-width:2px
+    style C fill:#fbb,stroke:#333,stroke-width:2px
+    style D fill:#bbf,stroke:#333,stroke-width:2px
+    style E fill:#bfb,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+    style G fill:#ff0,stroke:#333,stroke-width:2px
+    style H fill:#bbf,stroke:#333,stroke-width:2px
+    style I fill:#bbf,stroke:#333,stroke-width:2px
+    style J fill:#bbf,stroke:#333,stroke-width:2px
+    style K fill:#bfb,stroke:#333,stroke-width:2px
+    style L fill:#bfb,stroke:#333,stroke-width:2px
+    style N fill:#bfb,stroke:#333,stroke-width:2px
 ```
-┌─────────────────────────────────────────┐
-│         Static HTML (Ocean)              │
-│  ┌──────────────┐  ┌──────────────┐     │
-│  │  Interactive │  │  Interactive │     │
-│  │   Component  │  │   Component  │     │
-│  │   (Island 1) │  │   (Island 2) │     │
-│  └──────────────┘  └──────────────┘     │
-│         Static HTML continues...         │
-└─────────────────────────────────────────┘
+
+**Island Architecture Visual Representation
+
+```mermaid
+graph TD
+    subgraph "Complete Web Page"
+        direction TB
+        
+        subgraph "Static Ocean"
+            H1[Header - Static HTML]
+            P1[Paragraph 1 - Static]
+            P2[Paragraph 2 - Static]
+        end
+        
+        subgraph "Island 1"
+            I1[Interactive Counter]
+            JS1[JavaScript Bundle 1]
+        end
+        
+        subgraph "Static Middle"
+            P3[More Static Content]
+            P4[Even More Static]
+        end
+        
+        subgraph "Island 2"
+            I2[Image Carousel]
+            JS2[JavaScript Bundle 2]
+        end
+        
+        subgraph "Island 3"
+            I3[Comment Form]
+            JS3[JavaScript Bundle 3]
+        end
+        
+        subgraph "Static Footer"
+            F1[Footer - Static]
+        end
+        
+        H1 --> P1
+        P1 --> P2
+        P2 --> I1
+        I1 --> P3
+        P3 --> P4
+        P4 --> I2
+        I2 --> I3
+        I3 --> F1
+        
+        JS1 -.-> I1
+        JS2 -.-> I2
+        JS3 -.-> I3
+    end
+    
+    style H1 fill:#ddd,stroke:#333
+    style P1 fill:#ddd,stroke:#333
+    style P2 fill:#ddd,stroke:#333
+    style P3 fill:#ddd,stroke:#333
+    style P4 fill:#ddd,stroke:#333
+    style F1 fill:#ddd,stroke:#333
+    
+    style I1 fill:#f9f,stroke:#333,stroke-width:3px
+    style I2 fill:#f9f,stroke:#333,stroke-width:3px
+    style I3 fill:#f9f,stroke:#333,stroke-width:3px
+    
+    style JS1 fill:#bbf,stroke:#333,stroke-dasharray: 5 5
+    style JS2 fill:#bbf,stroke:#333,stroke-dasharray: 5 5
+    style JS3 fill:#bbf,stroke:#333,stroke-dasharray: 5 5
 ```
 
 **Key Features:**
@@ -363,6 +537,37 @@ app.get('/', (req, res) => {
     }
   });
 });
+```
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+    participant Database
+    
+    User->>Browser: Request Page
+    Browser->>Server: GET /
+    
+    Server->>Database: Query Data
+    Database-->>Server: Stream Results
+    
+    Note over Server: Render Shell Immediately
+    Server-->>Browser: Send HTML Shell
+    
+    Note over Server: Stream Content as Rendered
+    Server-->>Browser: Chunk 1: Header
+    Server-->>Browser: Chunk 2: Main Content
+    Server-->>Browser: Chunk 3: Comments
+    
+    Browser->>Browser: Progressive Rendering
+    
+    Note over Browser: Page Becomes Interactive
+    Browser->>Server: Request JavaScript
+    Server-->>Browser: Send JS Bundle
+    
+    Browser->>Browser: Hydrate Page
+    Browser-->>User: Fully Interactive Page
 ```
 
 **Benefits:**
