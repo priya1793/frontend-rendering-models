@@ -350,6 +350,178 @@ const html = renderToString(<App initialData={initialData} />);
 ReactDOM.hydrate(<App initialData={window.__INITIAL_DATA__} />, root);
 ```
 
+**Flow Diagram:**
+
+```mermaid
+graph TD
+    subgraph "Server Side - Initial Request"
+        A[User Requests Page] --> B[Server Receives Request]
+        B --> C[Server Fetches Data]
+        C --> D[Server Renders Complete HTML]
+        D --> E[Server Injects Initial State]
+        E --> F[Server Sends HTML + State]
+    end
+    
+    subgraph "Browser - Initial Load"
+        G[Browser Receives HTML] --> H[Display Content Immediately]
+        H --> I[Download JavaScript Bundle]
+        I --> J[Extract Initial State]
+        J --> K[Hydrate with Initial State]
+        K --> L[Page Interactive]
+    end
+    
+    subgraph "Browser - Subsequent Navigation"
+        M[User Clicks Link] --> N[Client-side Router]
+        N --> O[Fetch Data via API]
+        O --> P[Render in Browser]
+        P --> Q[Update DOM]
+        Q --> M
+    end
+    
+    F --> G
+    L --> M
+    
+    style A fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style B fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style C fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style D fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style E fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style F fill:#e0e0e0,stroke:#333,stroke-width:2px
+    
+    style G fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style H fill:#bdbdbd,stroke:#333,stroke-width:2px
+    style I fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style J fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style K fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style L fill:#bdbdbd,stroke:#333,stroke-width:2px
+    
+    style M fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style N fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style O fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style P fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style Q fill:#bdbdbd,stroke:#333,stroke-width:2px
+```
+
+
+**Sequence Diagram:**
+
+```mermaid
+graph TD
+  sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+    participant API
+    
+    Note over User,Server: Initial Page Load
+    
+    User->>Browser: Enter URL
+    Browser->>Server: GET Request
+    Server->>Server: Execute Same Code as Client
+    Server->>API: Fetch Initial Data
+    API-->>Server: Return Data
+    Server->>Server: Render to HTML
+    Server->>Browser: Send HTML + Initial State
+    
+    Note over Browser: Fast Initial Paint
+    
+    Browser->>Browser: Display HTML Immediately
+    Browser->>Browser: Download JavaScript
+    Browser->>Browser: Extract Initial State
+    Browser->>Browser: Hydrate Components
+    Browser-->>User: Page Interactive
+    
+    Note over User,API: Subsequent Navigation (CSR Mode)
+    
+    User->>Browser: Click Link
+    Browser->>Browser: Client-side Router
+    Browser->>API: Fetch Data via AJAX
+    API-->>Browser: Return JSON
+    Browser->>Browser: Render in Browser
+    Browser-->>User: Update View
+    
+    Note over Browser: No Server Round-trip Needed
+```
+
+
+**Visual Representation:**
+
+```mermaid
+graph TB
+    subgraph "Development"
+        A[Single Codebase]
+        B[Shared Components]
+        C[Universal APIs]
+        A --> B
+        A --> C
+    end
+    
+    subgraph "Build Process"
+        D[Server Bundle]
+        E[Client Bundle]
+        F[Shared Utilities]
+        B --> D
+        B --> E
+        C --> F
+    end
+    
+    subgraph "Server Environment"
+        G[Node.js Server]
+        H[Render to String]
+        I[Data Fetching]
+        J[Initial State]
+        D --> G
+        G --> H
+        G --> I
+        G --> J
+    end
+    
+    subgraph "Client Environment"
+        K[Browser]
+        L[Hydration]
+        M[Client Router]
+        N[State Management]
+        E --> K
+        K --> L
+        K --> M
+        K --> N
+    end
+    
+    subgraph "Data Flow"
+        O[Initial Props]
+        P[API Calls]
+        Q[Shared State]
+        J --> O
+        O --> L
+        I --> P
+        P --> Q
+        N --> Q
+    end
+    
+    style A fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style B fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style C fill:#f5f5f5,stroke:#333,stroke-width:2px
+    
+    style D fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style E fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style F fill:#bdbdbd,stroke:#333,stroke-width:2px
+    
+    style G fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style H fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style I fill:#e0e0e0,stroke:#333,stroke-width:2px
+    style J fill:#e0e0e0,stroke:#333,stroke-width:2px
+    
+    style K fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style L fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style M fill:#9e9e9e,stroke:#333,stroke-width:2px
+    style N fill:#9e9e9e,stroke:#333,stroke-width:2px
+    
+    style O fill:#bdbdbd,stroke:#333,stroke-width:2px
+    style P fill:#bdbdbd,stroke:#333,stroke-width:2px
+    style Q fill:#bdbdbd,stroke:#333,stroke-width:2px
+```
+
+
 **Key Concepts:**
 - 🔄 **Code Sharing**: Same components run on server and client
 - 📦 **State Transfer**: Server passes initial state to client
@@ -398,7 +570,8 @@ import ImageCarousel from '../components/ImageCarousel';
 **Flow Diagram:**
 
 ```mermaid
-subgraph "Server/Build"
+graph TD
+  subgraph "Server/Build"
         A[Generate Static HTML] --> B[Identify Interactive Islands]
         B --> C[Mark Islands with client directives]
     end
@@ -811,7 +984,8 @@ graph TD
 **Visual Representation - Hydration Prioritization**
 
 ```mermaid
- subgraph "Web Page - Progressive Hydration"
+graph TD
+   subgraph "Web Page - Progressive Hydration"
         direction TB
         
         subgraph "Critical Zone - Hydrate Immediately"
